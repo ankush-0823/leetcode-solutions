@@ -1,11 +1,23 @@
-public class Solution {
-    public static String firstPalindrome(String[] words) {
+class Solution {
+    public String firstPalindrome(String[] words) {
         for (String word : words) {
-            StringBuilder reversed = new StringBuilder(word).reverse();
-            if (word.equals(reversed.toString())) {
+            if (isPalindrome(word)) {
                 return word;
             }
         }
-        return "";
+        return ""; // If no palindrome is found
+    }
+    
+    public boolean isPalindrome(String s) {
+        int length = s.length();
+        int i = 0, j = length - 1;
+        while (i < j) {
+            if (Character.toLowerCase(s.charAt(i)) != Character.toLowerCase(s.charAt(j))) {
+                return false;
+            }
+            i++;
+            j--;
+        }
+        return true;
     }
 }
