@@ -1,5 +1,3 @@
-
-
 class Solution {
     public long largestPerimeter(int[] nums) {
         long sum = 0;
