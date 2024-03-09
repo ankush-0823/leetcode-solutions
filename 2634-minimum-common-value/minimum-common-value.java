@@ -1,12 +1,14 @@
 class Solution {
     public int getCommon(int[] nums1, int[] nums2) {
-        HashMap<Integer, Integer> mp = new HashMap<>();
-        for (int num : nums1) {
-            mp.put(num, mp.getOrDefault(num, 0) + 1);
-        }
-        for (int num : nums2) {
-            if (mp.containsKey(num) && mp.get(num) > 0) {
-                return num;
+        int len1 = nums1.length, len2 = nums2.length;
+        int ptr1 = 0, ptr2 = 0;
+        while(ptr1 < len1 && ptr2 < len2){
+            if(nums1[ptr1] < nums2[ptr2]){
+                ptr1++;
+            }else if(nums1[ptr1] > nums2[ptr2]){
+                ptr2++;
+            }else{
+                return nums1[ptr1];
             }
         }
         return -1;
