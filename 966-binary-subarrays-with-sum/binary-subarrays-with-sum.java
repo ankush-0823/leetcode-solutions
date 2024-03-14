@@ -1,18 +1,24 @@
 class Solution {
     public int numSubarraysWithSum(int[] nums, int goal) {
-     int l =nums.length;
-     int count =0;
-     int sum=0;
-     for(int i=0;i<l;i++){
-        for(int j=i;j<l;j++){
-            sum +=nums[j];
-            if(sum == goal){
-                count++;
-            }
-        }
-        sum=0;
+        int n = nums.length;
         
-     }
-     return count;
+        // HashMap to store cumulative sums and their frequencies
+        HashMap<Integer, Integer> mp = new HashMap<>();
+        int count = 0;
+        int currSum = 0;
+        mp.put(0, 1);
+        for (int num : nums) {
+            currSum += num;
+
+            // If there is a previous sum such that (current sum - previous sum) equals goal, increment count by the frequency of that previous sum
+            if (mp.containsKey(currSum - goal)) {
+                count += mp.get(currSum - goal);
+            }
+            
+            // Increment the frequency of current sum in the map
+            mp.put(currSum, mp.getOrDefault(currSum, 0) + 1);
+        }
+        
+        return count;
     }
 }
