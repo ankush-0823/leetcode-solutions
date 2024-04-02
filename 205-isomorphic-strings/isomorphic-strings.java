@@ -1,28 +1,18 @@
 class Solution {
     public boolean isIsomorphic(String s, String t) {
-        if (s.length() != t.length()) {
-            return false; // If lengths are different, strings can't be isomorphic
+   Map<Character,Character> m=new HashMap<>();
+        int n=s.length();
+        for(int i=0;i<n;i++){
+            char charS=s.charAt(i);
+            char charT=t.charAt(i);
+            if(m.containsKey(charS)){
+                if(m.get(charS)!=charT) return false;
+            } 
+            else{
+                if(m.containsValue(charT))  return false;
+                m.put(charS,charT);
+            } 
         }
-
-        int[] sToT = new int[256]; // Mapping from characters in s to characters in t
-        int[] tToS = new int[256]; // Mapping from characters in t to characters in s
-
-        for (int i = 0; i < s.length(); i++) {
-            char sChar = s.charAt(i);
-            char tChar = t.charAt(i);
-
-            // If the mapping is not established yet, create a new mapping
-            if (sToT[sChar] == 0 && tToS[tChar] == 0) {
-                sToT[sChar] = tChar;
-                tToS[tChar] = sChar;
-            } else {
-                // Check if the mappings match
-                if (sToT[sChar] != tChar || tToS[tChar] != sChar) {
-                    return false;
-                }
-            }
-        }
-
         return true;
     }
 }
