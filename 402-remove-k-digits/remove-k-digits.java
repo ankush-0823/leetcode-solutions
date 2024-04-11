@@ -1,46 +1,28 @@
-class Solution {
+public class Solution {
+    public String removeKdigits(String num, int k) {
+        StringBuilder result = new StringBuilder(); // it will act like a stack
+        int n = num.length();
+        
+        for(int i = 0; i < n; i++) {
+            while(result.length() > 0 && result.charAt(result.length() - 1) > num.charAt(i) && k > 0) {
+                result.deleteCharAt(result.length() - 1);
+                k--;
+            }
+            
+            if(result.length() > 0 || num.charAt(i) != '0') {
+                result.append(num.charAt(i)); // to avoid the case when we have preceding zeros
+            }
+        }
+        
+        while(result.length() > 0 && k > 0) {
+            result.deleteCharAt(result.length() - 1);
+            k--;
+        }
 
-	// TC : O(n)
-	// SC : O(n)
-	public String removeKdigits(String num, int k) {
-		Stack<Character> st = new Stack<>();
-		int i=0;
-		for(;i<num.length() && k>0;){
-			while(k>0 && !st.isEmpty() && num.charAt(i)< st.peek()){
-				st.pop();
-
-				k--;
-			}
-
-			st.push(num.charAt(i));
-			i++;
-		}
-
-
-
-		while(!st.isEmpty() && k>0){
-			st.pop();
-			k--;
-
-		}
-
-
-		String ans = "";
-		while(!st.isEmpty()){
-			ans = st.pop() + ans;
-		}
-
-		ans = ans + num.substring(i, num.length());
-		// 0002000
-		i = 0;
-		while(i<ans.length()){
-			if(ans.charAt(i) == '0'){
-				i++;
-			}    else {
-				break;
-			}
-		}
-		// "000000"
-		return ans.substring(i).length() == 0 ? "0" : ans.substring(i);
-	}
+        if(result.length() == 0) {
+            return "0";
+        }
+        
+        return result.toString();
+    }
 }
