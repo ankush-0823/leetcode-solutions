@@ -48,6 +48,7 @@ class MyCalendarTwo {
       return new Event(Math.max(e.start, start), Math.min(e.end, end));  
     }
 }
+
 /**
  * Your MyCalendarTwo object will be instantiated and called as such:
  * MyCalendarTwo obj = new MyCalendarTwo();
