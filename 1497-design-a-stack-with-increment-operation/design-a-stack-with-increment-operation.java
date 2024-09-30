@@ -30,7 +30,6 @@ class CustomStack {
         
     }
 }
-
 /**
  * Your CustomStack object will be instantiated and called as such:
  * CustomStack obj = new CustomStack(maxSize);
